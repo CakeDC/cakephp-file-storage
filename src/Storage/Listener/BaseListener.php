@@ -28,7 +28,7 @@ class BaseListener extends AbstractListener
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'pathBuilder' => 'Base',
         'pathBuilderOptions' => [
             'modelFolder' => true,
@@ -50,7 +50,7 @@ class BaseListener extends AbstractListener
      *
      * @var array
      */
-    public $_adapterClasses = [];
+    public array $_adapterClasses = [];
 
     /**
      * Implemented Events

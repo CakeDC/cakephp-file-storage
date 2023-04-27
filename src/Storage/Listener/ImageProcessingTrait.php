@@ -30,11 +30,11 @@ trait ImageProcessingTrait
 
     protected $_imageProcessor = null;
 
-    protected $_imageVersions = [];
+    protected array $_imageVersions = [];
 
-    protected $_imageVersionHashes = [];
+    protected array $_imageVersionHashes = [];
 
-    protected $_defaultOutput = [];
+    protected array $_defaultOutput = [];
 
     /**
      * Convenience method to auto create ALL and auto remove ALL image versions for

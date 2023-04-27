@@ -22,7 +22,7 @@ class FileStorageEntityTest extends FileStorageTestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'plugin.Burzum\FileStorage.FileStorage',
     ];
 

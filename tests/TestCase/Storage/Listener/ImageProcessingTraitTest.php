@@ -12,7 +12,7 @@ use Burzum\FileStorage\Storage\Listener\AbstractListener;
 use Burzum\FileStorage\Storage\Listener\ImageProcessingTrait;
 use Burzum\FileStorage\Test\TestCase\FileStorageTestCase;
 use Cake\Core\Configure;
-use Cake\Filesystem\Folder;
+use Shim\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
 
 /**
@@ -22,7 +22,7 @@ class TraitTestClass extends AbstractListener
 {
     use ImageProcessingTrait;
 
-    public $_defaultConfig = [
+    public array $_defaultConfig = [
         'pathBuilder' => 'Base',
         'pathBuilderOptions' => [
             'preserveFilename' => true,
@@ -56,7 +56,7 @@ class ImageProcessingTraitTest extends FileStorageTestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'plugin.Burzum\FileStorage.FileStorage',
     ];
 

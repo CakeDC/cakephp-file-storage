@@ -65,14 +65,14 @@ abstract class AbstractListener implements EventListenerInterface
      *
      * @var array
      */
-    protected $_adapterClasses = [];
+    protected array $_adapterClasses = [];
 
     /**
      * Default settings
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'pathBuilder' => '',
         'pathBuilderOptions' => [],
         'fileHash' => 'sha1',

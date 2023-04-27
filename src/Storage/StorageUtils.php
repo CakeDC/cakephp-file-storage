@@ -5,8 +5,8 @@ namespace Burzum\FileStorage\Storage;
 
 use Burzum\FileStorage\Storage\PathBuilder\BasePathBuilder;
 use Cake\Core\Configure;
-use Cake\Filesystem\File;
-use Cake\Filesystem\Folder;
+use Shim\Filesystem\File;
+use Shim\Filesystem\Folder;
 use Cake\Utility\Text;
 use InvalidArgumentException;
 use RuntimeException;

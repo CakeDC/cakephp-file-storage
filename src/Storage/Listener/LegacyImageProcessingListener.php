@@ -12,6 +12,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventInterface;
 use Cake\ORM\Table;
+use function Cake\I18n\__d as __d;
 
 /**
  * @author Florian Krämer
@@ -27,7 +28,7 @@ class LegacyImageProcessingListener extends AbstractListener
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'pathBuilder' => 'Base',
         'pathBuilderOptions' => [
 //          'pathPrefix' => 'files',

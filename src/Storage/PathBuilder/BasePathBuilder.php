@@ -28,7 +28,7 @@ class BasePathBuilder implements PathBuilderInterface
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'stripUuid' => true,
         'pathPrefix' => '',
         'pathSuffix' => '',

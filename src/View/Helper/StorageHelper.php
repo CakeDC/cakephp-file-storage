@@ -25,7 +25,7 @@ class StorageHelper extends Helper
      * @var array
      * Default configuration
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'pathBuilder' => 'Base',
         'pathBuilderOptions' => [
             'modelFolder' => true,

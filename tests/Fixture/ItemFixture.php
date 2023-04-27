@@ -24,14 +24,14 @@ class ItemFixture extends TestFixture
      *
      * @var string
      */
-    public $table = 'items';
+    public string $table = 'items';
 
     /**
      * Fields
      *
      * @var array
      */
-    public $fields = [
+    public array $fields = [
         'id' => ['type' => 'uuid', 'null' => true, 'default' => null, 'length' => 36],
         'name' => ['type' => 'string', 'null' => true, 'default' => null],
         'path' => ['type' => 'string', 'null' => true, 'default' => null],
@@ -46,7 +46,7 @@ class ItemFixture extends TestFixture
      *
      * @var array
      */
-    public $records = [
+    public array $records = [
         [
             'id' => 'item-1',
             'name' => 'Cake',

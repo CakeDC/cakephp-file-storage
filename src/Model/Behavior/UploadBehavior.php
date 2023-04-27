@@ -37,7 +37,7 @@ class UploadBehavior extends Behavior
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'defaults' => [
             'adapterConfig' => 'Local',
             'model' => 'Burzum/FileStorage.FileStorage',

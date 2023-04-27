@@ -20,7 +20,7 @@ class UploadValidatorTest extends FileStorageTestCase
      *
      * @var array
      */
-    public $fixtures = [];
+    protected array $fixtures = [];
 
     /**
      * startTest

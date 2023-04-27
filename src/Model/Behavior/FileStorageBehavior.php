@@ -18,7 +18,7 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
-use Cake\Filesystem\File;
+use Shim\Filesystem\File;
 use Cake\ORM\Behavior;
 
 /**
@@ -50,7 +50,7 @@ class FileStorageBehavior extends Behavior
      *
      * @var array
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'defaultStorageConfig' => 'Local',
         'ignoreEmptyFile' => true,
         'fileField' => 'file',

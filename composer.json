@@ -19,16 +19,17 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.3",
-        "cakephp/cakephp": "^4.3",
+        "php": ">=8.1",
+        "cakephp/cakephp": "5.x-dev",
+        "dereuromark/cakephp-shim": "cake5-dev",
         "cakephp/plugin-installer": "^1.0.0",
         "knplabs/gaufrette": "^0.7.0|^0.8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^9.5.16",
         "vlucas/phpdotenv": "^3.3",
         "cakephp/cakephp-codesniffer": "^4.0",
-        "burzum/cakephp-imagine-plugin": "^4.0",
+        "burzum/cakephp-imagine-plugin": "^5.0",
         "league/flysystem": "^1.0.0",
         "aws/aws-sdk-php": "*"
     },
@@ -54,6 +55,12 @@
         "burzum/cakephp-imagine-plugin": "Required if you want to use the image processing feature of FileStorage",
         "league/flysystem": "Alternative for Gaufrette, see the docs how to configure it."
     },
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "git@github.com:CakeDC/cakephp-imagine-plugin.git"
+		}
+	],
     "scripts": {
         "check": [
             "@cs-check",

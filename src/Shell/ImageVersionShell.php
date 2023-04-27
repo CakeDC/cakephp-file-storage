@@ -19,6 +19,7 @@ use Cake\Event\Event;
 use Cake\Event\EventManager;
 use Cake\ORM\TableRegistry;
 use Exception;
+use function Cake\I18n\__d as __d;
 
 /**
  * ImageShell

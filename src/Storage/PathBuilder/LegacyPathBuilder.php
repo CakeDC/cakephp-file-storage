@@ -23,7 +23,7 @@ class LegacyPathBuilder extends BasePathBuilder
      *
      * @inheritDoc
      */
-    protected $_defaultConfig = [
+    protected array $_defaultConfig = [
         'pathPrefix' => 'files',
         'modelFolder' => 'files',
         'preserveFilename' => false,

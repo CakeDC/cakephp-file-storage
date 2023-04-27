@@ -25,7 +25,7 @@ class ImageHelper extends StorageHelper
      *
      * @var array
      */
-    public $helpers = [
+    protected array $helpers = [
         'Html',
     ];
 

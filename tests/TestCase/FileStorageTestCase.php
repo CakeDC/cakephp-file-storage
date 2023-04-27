@@ -11,7 +11,7 @@ use Burzum\FileStorage\Storage\StorageUtils;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Event\EventManager;
-use Cake\Filesystem\Folder;
+use Shim\Filesystem\Folder;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
@@ -29,7 +29,7 @@ class FileStorageTestCase extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'plugin.Burzum\FileStorage.FileStorage',
     ];
 

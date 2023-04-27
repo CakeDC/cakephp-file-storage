@@ -23,7 +23,7 @@ class FileStorage extends Entity
      * @var array
      * {@inheritdoc}
      */
-    protected $_virtual = [
+    protected array $_virtual = [
         'url',
         'full_path',
     ];
@@ -41,7 +41,7 @@ class FileStorage extends Entity
      * @var array
      * Path Builder options
      */
-    protected $_pathBuilderOptions = [];
+    protected array $_pathBuilderOptions = [];
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ class FileStorage extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         '*' => true,
     ];
 

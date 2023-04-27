@@ -24,14 +24,14 @@ class FileStorageFixture extends TestFixture
      *
      * @var string
      */
-    public $table = 'file_storage';
+    public string $table = 'file_storage';
 
     /**
      * Fields definition
      *
      * @var array
      */
-    public $fields = [
+    public array $fields = [
         'id' => ['type' => 'uuid', 'null' => true, 'default' => null, 'length' => 36],
         'user_id' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 36],
         'foreign_key' => ['type' => 'string', 'null' => true, 'default' => null, 'length' => 36],
@@ -55,7 +55,7 @@ class FileStorageFixture extends TestFixture
      *
      * @var array
      */
-    public $records = [
+    public array $records = [
         [
             'id' => 'file-storage-1',
             'user_id' => 'user-1',

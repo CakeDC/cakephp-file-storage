@@ -17,7 +17,7 @@ class LegacyPathBuilderTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'plugin.Burzum\FileStorage.FileStorage',
     ];
 

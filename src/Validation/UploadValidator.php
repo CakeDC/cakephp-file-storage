@@ -5,6 +5,7 @@ namespace Burzum\FileStorage\Validation;
 
 use Cake\I18n\Number;
 use Cake\Validation\Validator;
+use function Cake\I18n\__d as __d;
 
 class UploadValidator extends Validator
 {

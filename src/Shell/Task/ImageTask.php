@@ -20,6 +20,7 @@ use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventManager;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
+use function Cake\I18n\__d as __d;
 
 /**
  * Task to generate and remove image versions based on the identifier and the versions.

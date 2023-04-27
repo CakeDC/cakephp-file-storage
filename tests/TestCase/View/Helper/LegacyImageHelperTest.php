@@ -90,10 +90,10 @@ class LegacyImageHelperTest extends FileStorageTestCase
         EventManager::instance()->on($this->listeners['LegacyImageProcessingListener']);
 
         $result = $this->Image->display($image, 't150');
-        $this->assertEquals('<img src="/test/path/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt=""/>', $result);
+        $this->assertEquals('<img src="/test/path/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt="">', $result);
 
         $result = $this->Image->display($image);
-        $this->assertEquals('<img src="/test/path/e479b480f60b11e1a21f0800200c9a66.jpg" alt=""/>', $result);
+        $this->assertEquals('<img src="/test/path/e479b480f60b11e1a21f0800200c9a66.jpg" alt="">', $result);
 
         // Testing the LegacyLocalFileStorageListener
         $this->_removeListeners();
@@ -101,16 +101,16 @@ class LegacyImageHelperTest extends FileStorageTestCase
 
         $result = $this->Image->display($image, 't150');
         if (PHP_INT_SIZE === 8) {
-            $this->assertEquals('<img src="/img/images/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt=""/>', $result);
+            $this->assertEquals('<img src="/img/images/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt="">', $result);
         } else {
-            $this->assertEquals('<img src="/img/images/86/51/86/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt=""/>', $result);
+            $this->assertEquals('<img src="/img/images/86/51/86/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt="">', $result);
         }
 
         $result = $this->Image->display($image);
         if (PHP_INT_SIZE === 8) {
-            $this->assertEquals('<img src="/img/images/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt=""/>', $result);
+            $this->assertEquals('<img src="/img/images/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt="">', $result);
         } else {
-            $this->assertEquals('<img src="/img/images/86/51/86/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt=""/>', $result);
+            $this->assertEquals('<img src="/img/images/86/51/86/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt="">', $result);
         }
 
         // Testing the LocalListener
@@ -118,10 +118,10 @@ class LegacyImageHelperTest extends FileStorageTestCase
         EventManager::instance()->on($this->listeners['LocalListener']);
 
         $result = $this->Image->display($image, 't150');
-        $this->assertEquals('<img src="/img/Test/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt=""/>', $result);
+        $this->assertEquals('<img src="/img/Test/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.c3f33c2a.jpg" alt="">', $result);
 
         $result = $this->Image->display($image);
-        $this->assertEquals('<img src="/img/Test/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt=""/>', $result);
+        $this->assertEquals('<img src="/img/Test/5c/39/33/e479b480f60b11e1a21f0800200c9a66/e479b480f60b11e1a21f0800200c9a66.jpg" alt="">', $result);
     }
 
     /**
@@ -153,10 +153,10 @@ class LegacyImageHelperTest extends FileStorageTestCase
         Configure::write('Media.fallbackImages.Test.t150', 't150fallback.png');
 
         $result = $this->Image->fallbackImage(['fallback' => true], [], 't150');
-        $this->assertEquals($result, '<img src="/img/placeholder/t150.jpg" alt=""/>');
+        $this->assertEquals($result, '<img src="/img/placeholder/t150.jpg" alt="">');
 
         $result = $this->Image->fallbackImage(['fallback' => 'something.png'], [], 't150');
-        $this->assertEquals($result, '<img src="/img/something.png" alt=""/>');
+        $this->assertEquals($result, '<img src="/img/something.png" alt="">');
 
         $result = $this->Image->fallbackImage([], [], 't150');
         $this->assertEquals($result, '');

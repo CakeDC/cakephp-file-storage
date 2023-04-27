@@ -22,7 +22,7 @@ trait EventFilterTrait
      *
      * @var array
      */
-    protected $_eventFilters = [
+    protected array $_eventFilters = [
         'subject' => [],
         'adapterConfig' => [],
         'adapterClass' => [],

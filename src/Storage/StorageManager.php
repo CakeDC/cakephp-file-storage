@@ -24,7 +24,7 @@ class StorageManager
      *
      * @var array
      */
-    protected $_adapterConfig = [
+    protected array $_adapterConfig = [
         'Local' => [
             'adapterOptions' => [TMP, true],
             'adapterClass' => '\Gaufrette\Adapter\Local',

@@ -31,7 +31,7 @@ class LocalListener extends BaseListener
      *
      * @var array
      */
-    public $_adapterClasses = [
+    public array $_adapterClasses = [
         '\Gaufrette\Adapter\Local',
     ];
 }

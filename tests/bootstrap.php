@@ -6,6 +6,7 @@ declare(strict_types=1);
  */
 
 use Cake\Core\Plugin;
+use function Cake\Core\env as env;
 
 $findRoot = function ($root) {
     do {

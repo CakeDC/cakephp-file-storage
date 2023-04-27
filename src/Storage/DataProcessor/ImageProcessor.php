@@ -29,11 +29,11 @@ class ImageProcessor implements EventListenerInterface
 
     protected $_imageProcessor = null;
 
-    protected $_imageVersions = [];
+    protected array $_imageVersions = [];
 
-    protected $_imageVersionHashes = [];
+    protected array $_imageVersionHashes = [];
 
-    protected $_defaultOutput = [];
+    protected array $_defaultOutput = [];
 
     protected $EventSubject;
 
