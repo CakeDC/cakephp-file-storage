@@ -35,7 +35,7 @@ class LegacyLocalFileStorageListenerTest extends TestCase
         $this->fileFixtures = Plugin::path('Burzum/FileStorage') . 'tests' . DS . 'Fixture' . DS . 'File' . DS;
 
         $this->listener = $this->getMockBuilder(LegacyLocalFileStorageListener::class)
-            ->setMethods([
+            ->addMethods([
                 'storageAdapter',
             ])
             ->setConstructorArgs([

@@ -13,7 +13,7 @@ class TestStorageTrait
     use StorageTrait;
 }
 
-class BasePathBuilderTest extends TestCase
+class StorageTraitTest extends TestCase
 {
     /**
      * Fixtures

@@ -96,8 +96,8 @@ class ImageProcessingTraitTest extends FileStorageTestCase
             ],
         ]);
 
-        $this->Listener = $this->getMockBuilder('TraitTestClass')
-            ->setMethods([
+        $this->Listener = $this->getMockBuilder(TraitTestClass::class)
+            ->addMethods([
                 'getAdapter',
             ])
             ->getMock();

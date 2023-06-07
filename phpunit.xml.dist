@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="./tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" processIsolation="false" stopOnFailure="false" bootstrap="./tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd">
   <coverage>
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-    <exclude>
-      <file>./src/Storage/PathBuilder/PathBuilderInterface.php</file>
-      <directory>./vendor</directory>
-      <directory>./tests</directory>
-      <directory>./src/Model/Entity</directory>
-      <directory>./src/Event</directory>
-      <directory>./src/Lib</directory>
-    </exclude>
     <report>
       <html outputDirectory="./tmp/tests/report" lowUpperBound="35" highLowerBound="70"/>
     </report>
@@ -29,7 +18,7 @@
   </testsuites>
   <!-- Setup a listener for fixtures -->
   <extensions>
-    <extension class="\Cake\TestSuite\Fixture\PHPUnitExtension" />
+    <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
   </extensions>
   <!--
 		ANY logging MUST be disabled when running selenium tests!
@@ -47,4 +36,17 @@
     <!--<log type="testdox-text" target=".//tmp/tests/testdox.txt"/>-->
   </logging>
   <!-- Add a filter to make sure we don't count vendors and Tests in the coverage report -->
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <exclude>
+      <file>./src/Storage/PathBuilder/PathBuilderInterface.php</file>
+      <directory>./vendor</directory>
+      <directory>./tests</directory>
+      <directory>./src/Model/Entity</directory>
+      <directory>./src/Event</directory>
+      <directory>./src/Lib</directory>
+    </exclude>
+  </source>
 </phpunit>

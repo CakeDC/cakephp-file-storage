@@ -34,7 +34,8 @@ class LocalListenerTest extends TestCase
         $this->fileFixtures = Plugin::path('Burzum/FileStorage') . 'tests' . DS . 'Fixture' . DS . 'File' . DS;
 
         $this->listener = $this->getMockBuilder('Burzum\FileStorage\Storage\Listener\LocalListener')
-            ->setMethods(['storageAdapter', 'getStorageAdapter'])
+            ->onlyMethods(['getStorageAdapter'])
+            ->addMethods(['storageAdapter'])
             ->setConstructorArgs([['models' => ['Item']]])
             ->getMock();
 

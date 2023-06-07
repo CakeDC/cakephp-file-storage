@@ -79,7 +79,7 @@ class ValidationListenerTest extends TestCase
         $this->assertInstanceOf(Validator::class, $result);
 
         $mockListener = $this->getMockBuilder(TestValidationListener::class)
-            ->setMethods(['validationAvatar'])
+            ->onlyMethods(['validationAvatar'])
             ->getMock();
 
         $mockListener->expects($this->once())
