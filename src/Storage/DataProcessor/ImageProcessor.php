@@ -17,6 +17,7 @@ use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventListenerInterface;
+use Exception;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -228,7 +229,7 @@ class ImageProcessor implements EventListenerInterface
                     'path' => $path,
                     'hash' => $this->getImageVersionHash($entity->get('model'), $version),
                 ];
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $result[$version] = [
                     'status' => 'error',
                     'error' => $e->getMessage(),
@@ -264,7 +265,7 @@ class ImageProcessor implements EventListenerInterface
             ];
             try {
                 $this->getStorageAdapter($entity->get('adapter'))->delete($path);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $result[$version]['status'] = 'error';
                 $result[$version]['error'] = $e->getMessage();
             }

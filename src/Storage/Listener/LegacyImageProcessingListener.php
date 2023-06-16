@@ -12,6 +12,8 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventInterface;
 use Cake\ORM\Table;
+use Exception;
+use RuntimeException;
 use function Cake\I18n\__d as __d;
 
 /**
@@ -166,7 +168,7 @@ class LegacyImageProcessingListener extends AbstractListener
             try {
                 $image = $table->processImage($tmpFile, null, ['format' => $entity['extension']], $imageOperations);
                 $Storage->write($string, $image->get($entity['extension']), true);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->log($e->getMessage());
                 unlink($tmpFile);
                 throw $e;
@@ -227,7 +229,7 @@ class LegacyImageProcessingListener extends AbstractListener
                     if ($Storage->has($string)) {
                         $Storage->delete($string);
                     }
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     $this->log($e->getMessage());
                 }
             }
@@ -254,12 +256,12 @@ class LegacyImageProcessingListener extends AbstractListener
                 $Storage = StorageManager::adapter($record['adapter']);
                 if (!$Storage->has($string)) {
                     $Event->stopPropagation();
-                    $Event->result = false;
+                    $Event->setResult(false);
 
                     return false;
                 }
                 $Storage->delete($string);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->log($e->getMessage());
                 $Event->stopPropagation();
                 $Event->setResult(false);
@@ -273,9 +275,9 @@ class LegacyImageProcessingListener extends AbstractListener
             }
             $Event->stopPropagation();
             $Event->setResult(true);
-
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -339,7 +341,7 @@ class LegacyImageProcessingListener extends AbstractListener
                     $this->_createVersions($table, $record, $operations);
                 }
                 $table->data = $data;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->log($e->getMessage());
             }
         }
@@ -358,7 +360,7 @@ class LegacyImageProcessingListener extends AbstractListener
         extract($data);
 
         if (!isset($data['image']['adapter'])) {
-            throw new \RuntimeException(__d('file_storage', 'No adapter config key passed!'));
+            throw new RuntimeException(__d('file_storage', 'No adapter config key passed!'));
         }
 
         $adapterClass = $this->getAdapterClassName($data['image']['adapter']);
@@ -368,7 +370,7 @@ class LegacyImageProcessingListener extends AbstractListener
             $this->$buildMethod($Event);
         } else {
             $message = __d('file_storage', 'No callback image url callback implemented for adapter %s', $adapterClass);
-            throw new \RuntimeException($message);
+            throw new RuntimeException($message);
         }
     }
 
@@ -503,23 +505,16 @@ class LegacyImageProcessingListener extends AbstractListener
      * @param string
      * @return string|false
      */
-    public function getAdapterClassName(string $adapterConfigName)
+    public function getAdapterClassName(string $configName)
     {
-        $config = StorageManager::config($adapterConfigName);
+        $config = StorageManager::config($configName);
 
         switch ($config['adapterClass']) {
             case '\Gaufrette\Adapter\Local':
                 $this->adapterClass = 'Local';
 
                 return $this->adapterClass;
-            case '\Gaufrette\Adapter\AwsS3':
-                $this->adapterClass = 'AwsS3';
-
-                return $this->adapterClass;
             case '\Gaufrette\Adapter\AmazonS3':
-                $this->adapterClass = 'AwsS3';
-
-                return $this->adapterClass;
             case '\Gaufrette\Adapter\AwsS3':
                 $this->adapterClass = 'AwsS3';
 

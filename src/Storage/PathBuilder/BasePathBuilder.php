@@ -371,7 +371,7 @@ class BasePathBuilder implements PathBuilderInterface
             $ds = DS;
         }
         if ($position === 'before' || $position === 'both') {
-            if (strpos($string, $ds) !== 0) {
+            if (!str_starts_with($string, $ds)) {
                 $string = $ds . $string;
             }
         }

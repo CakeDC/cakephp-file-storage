@@ -23,6 +23,7 @@ use Cake\Event\EventListenerInterface;
 use Cake\Log\LogTrait;
 use Cake\ORM\Table;
 use Cake\Utility\MergeVariablesTrait;
+use Exception;
 use Psr\Log\LogLevel;
 use RuntimeException;
 
@@ -269,7 +270,7 @@ abstract class AbstractListener implements EventListenerInterface
             file_put_contents($tmpFile, $storage->read($path));
 
             return $tmpFile;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->log($e->getMessage());
             throw new StorageException('Failed to create the temporary file.', 0, $e);
         }
@@ -382,7 +383,7 @@ abstract class AbstractListener implements EventListenerInterface
             }
 
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->log($e->getMessage(), LogLevel::ERROR, ['scope' => ['storage']]);
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }
@@ -410,7 +411,7 @@ abstract class AbstractListener implements EventListenerInterface
 
                 return true;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->log($e->getMessage(), LogLevel::ERROR, ['scope' => ['storage']]);
             throw new StorageException($e->getMessage(), $e->getCode(), $e);
         }

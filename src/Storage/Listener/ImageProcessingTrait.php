@@ -13,6 +13,7 @@ use Burzum\FileStorage\Storage\StorageUtils;
 use Cake\Core\Configure;
 use Cake\Datasource\EntityInterface;
 use Cake\Log\LogTrait;
+use Exception;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 use RuntimeException;
@@ -196,7 +197,7 @@ trait ImageProcessingTrait
                     'path' => $path,
                     'hash' => $this->getImageVersionHash($entity->get('model'), $version),
                 ];
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->log($e->getMessage(), LogLevel::ERROR, [
                     'fileStorage',
                 ]);
@@ -220,7 +221,7 @@ trait ImageProcessingTrait
             file_put_contents($tmpFile, $storage->read($path));
 
             return $tmpFile;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->log($e->getMessage(), LogLevel::ERROR, [
                 'fileStorage',
             ]);
@@ -252,7 +253,7 @@ trait ImageProcessingTrait
             ];
             try {
                 $this->getStorageAdapter($entity->get('adapter'))->delete($path);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $result[$version]['status'] = 'error';
                 $result[$version]['error'] = $e->getMessage();
             }

@@ -18,7 +18,6 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
-use Shim\Filesystem\File;
 use Cake\ORM\Behavior;
 
 /**
@@ -223,9 +222,8 @@ class FileStorageBehavior extends Behavior
     public function _getFileInfoFromUpload(&$upload, string $field = 'file'): void
     {
         if (!empty($upload[$field]['tmp_name'])) {
-            $File = new File($upload[$field]['tmp_name']);
             $upload['filesize'] = filesize($upload[$field]['tmp_name']);
-            $upload['mime_type'] = $File->mime();
+            $upload['mime_type'] = mime_content_type($upload[$field]['tmp_name']);
         }
 
         if (!empty($upload[$field]['name'])) {
