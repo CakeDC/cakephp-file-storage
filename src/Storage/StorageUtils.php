@@ -5,8 +5,6 @@ namespace Burzum\FileStorage\Storage;
 
 use Burzum\FileStorage\Storage\PathBuilder\BasePathBuilder;
 use Cake\Core\Configure;
-use Shim\Filesystem\File;
-use Shim\Filesystem\Folder;
 use Cake\Utility\Text;
 use InvalidArgumentException;
 use RuntimeException;
@@ -190,7 +188,6 @@ class StorageUtils
      */
     public static function fileToUploadArray(string $file, $fileName = null): array
     {
-        $File = new File($file);
         if (empty($fileName)) {
             $fileName = basename($file);
         }
@@ -199,8 +196,8 @@ class StorageUtils
             'name' => $fileName,
             'tmp_name' => $file,
             'error' => 0,
-            'type' => $File->mime(),
-            'size' => $File->size(),
+            'type' => mime_content_type($file),
+            'size' => filesize($file),
         ];
     }
 
@@ -222,7 +219,7 @@ class StorageUtils
             $folder = TMP;
         }
         if ($checkAndCreatePath === true && !is_dir($folder)) {
-            new Folder($folder, true);
+            mkdir($folder);
         }
 
         return $folder . Text::uuid();

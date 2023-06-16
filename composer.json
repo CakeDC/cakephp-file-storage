@@ -23,7 +23,8 @@
         "cakephp/cakephp": "5.x-dev",
         "dereuromark/cakephp-shim": "cake5-dev",
         "cakephp/plugin-installer": "^1.0.0",
-        "knplabs/gaufrette": "^0.7.0|^0.8.0"
+        "knplabs/gaufrette": "^0.7.0|^0.8.0",
+        "ext-fileinfo": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.0",
@@ -33,12 +34,6 @@
         "league/flysystem": "^1.0.0",
         "aws/aws-sdk-php": "*"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/skie/cakephp-imagine-plugin"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Burzum\\FileStorage\\": "src",
@@ -57,7 +52,7 @@
     },
 	"repositories": [
 		{
-			"type": "vcs",
+			"type": "git",
 			"url": "git@github.com:CakeDC/cakephp-imagine-plugin.git"
 		}
 	],

@@ -15,6 +15,7 @@ use Burzum\FileStorage\Storage\StorageUtils;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\ORM\Behavior;
+use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Validation\Validator;
 
@@ -116,7 +117,7 @@ class UploadBehavior extends Behavior
      * @param array $options Options.
      * @return \Cake\ORM\Table
      */
-    protected function _getStorageModel(array $options): \Cake\ORM\Table
+    protected function _getStorageModel(array $options): Table
     {
         if (!empty($options['association'])) {
             return $this->{$options['association']};
@@ -131,7 +132,7 @@ class UploadBehavior extends Behavior
      * @param array $options
      * @return \Cake\Datasource\EntityInterface
      */
-    protected function _composeEntity($file, \Cake\ORM\Table $table, array $options): EntityInterface
+    protected function _composeEntity($file, Table $table, array $options): EntityInterface
     {
         if (isset($options['validate']) && is_callable($options['validate'])) {
             $validator = $table->validationDefault(new Validator());

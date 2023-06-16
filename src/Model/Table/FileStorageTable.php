@@ -22,6 +22,9 @@ use Cake\ORM\Table;
  * @author Florian Krämer
  * @copyright 2012 - 2017 Florian Krämer
  * @license MIT
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @mixin \Burzum\FileStorage\Model\Behavior\FileStorageBehavior
  */
 class FileStorageTable extends Table
 {

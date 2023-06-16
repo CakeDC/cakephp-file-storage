@@ -80,7 +80,7 @@ class ValidationListener
         $methods = get_class_methods($this);
 
         foreach ($methods as $method) {
-            if (substr($method, 0, 10) === 'validation') {
+            if (str_starts_with($method, 'validation')) {
                 if ($this->config['passDefaultValidator']) {
                     $validator = $table->getValidator('default');
                 } else {
