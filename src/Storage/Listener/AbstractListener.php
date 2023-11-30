@@ -167,18 +167,6 @@ abstract class AbstractListener implements EventListenerInterface
      */
     protected function _checkEvent(EventInterface $event): bool
     {
-        $className = $this->_getAdapterClassFromConfig($event->getData('entity')['adapter']);
-        $classes = $this->_adapterClasses;
-
-        if (!empty($classes) && !in_array($className, $classes)) {
-            $message = 'The listener `%s` doesn\'t allow the `%s` adapter class! Probably because it can\'t work with it.';
-            throw new StorageException(sprintf(
-                $message,
-                static::class,
-                $className
-            ));
-        }
-
         return $event->getSubject() instanceof Table && $this->_modelFilter($event);
     }
 
