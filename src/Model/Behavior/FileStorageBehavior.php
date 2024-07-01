@@ -18,7 +18,6 @@ use Cake\Datasource\EntityInterface;
 use Cake\Event\Event;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
-use Cake\Filesystem\File;
 use Cake\ORM\Behavior;
 
 /**
@@ -67,7 +66,9 @@ class FileStorageBehavior extends Behavior
     {
         $field = $this->getConfig('fileField');
         if ($this->getConfig('ignoreEmptyFile') === true) {
-            if (!isset($entity[$field]['error']) || $entity[$field]['error'] === UPLOAD_ERR_NO_FILE) {
+            /** @var \Psr\Http\Message\UploadedFileInterface|null $fileField */
+            $fileField = $entity[$field];
+            if (!$fileField || $fileField->getError() === UPLOAD_ERR_NO_FILE) {
                 return false;
             }
         }
@@ -222,15 +223,17 @@ class FileStorageBehavior extends Behavior
      */
     public function _getFileInfoFromUpload(&$upload, string $field = 'file'): void
     {
-        if (!empty($upload[$field]['tmp_name'])) {
-            $File = new File($upload[$field]['tmp_name']);
-            $upload['filesize'] = filesize($upload[$field]['tmp_name']);
-            $upload['mime_type'] = $File->mime();
+        /** @var \Psr\Http\Message\UploadedFileInterface|null $fileField */
+        $fileField = $upload[$field];
+
+        if ($fileField) {
+            $upload['extension'] = pathinfo($fileField->getClientFilename(), PATHINFO_EXTENSION);
+            $upload['filename'] = $fileField->getClientFilename();
         }
 
-        if (!empty($upload[$field]['name'])) {
-            $upload['extension'] = pathinfo($upload[$field]['name'], PATHINFO_EXTENSION);
-            $upload['filename'] = $upload[$field]['name'];
+        if ($fileField || !$fileField->getError()) {
+            $upload['filesize'] = $fileField->getSize();
+            $upload['mime_type'] = $fileField->getClientMediaType();
         }
     }
 
