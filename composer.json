@@ -35,7 +35,7 @@
     "repositories": [
         {
             "type": "git",
-            "url": "https://github.com/skie/cakephp-imagine-plugin"
+            "url": "https://github.com/CakeDC/cakephp-imagine-plugin.git"
         }
     ],
     "autoload": {
