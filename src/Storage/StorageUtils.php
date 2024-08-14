@@ -5,10 +5,11 @@ namespace Burzum\FileStorage\Storage;
 
 use Burzum\FileStorage\Storage\PathBuilder\BasePathBuilder;
 use Cake\Core\Configure;
-use Cake\Filesystem\File;
-use Cake\Filesystem\Folder;
 use Cake\Utility\Text;
 use InvalidArgumentException;
+use Laminas\Diactoros\UploadedFile;
+use League\MimeTypeDetection\FinfoMimeTypeDetector;
+use Psr\Http\Message\UploadedFileInterface;
 use RuntimeException;
 
 /**
@@ -182,26 +183,17 @@ class StorageUtils
     }
 
     /**
-     * Returns an array that matches the structure of a regular upload for a local file
-     *
-     * @param string $file The file you want to get an upload array for.
-     * @param string|null $fileName Name of the file to use in the upload array.
-     * @return array Array that matches the structure of a regular upload
+     * Returns UploadedFileInterface object from the file path
      */
-    public static function fileToUploadArray(string $file, $fileName = null): array
+    public static function fileToUploadedFileObject(string $file, $fileName = null): UploadedFileInterface
     {
-        $File = new File($file);
-        if (empty($fileName)) {
-            $fileName = basename($file);
-        }
-
-        return [
-            'name' => $fileName,
-            'tmp_name' => $file,
-            'error' => 0,
-            'type' => $File->mime(),
-            'size' => $File->size(),
-        ];
+        return new UploadedFile(
+            $file,
+            filesize($file),
+            UPLOAD_ERR_OK,
+            $fileName ?? basename($file),
+            (new FinfoMimeTypeDetector())->detectMimeTypeFromFile($file)
+        );
     }
 
     /**
@@ -222,22 +214,10 @@ class StorageUtils
             $folder = TMP;
         }
         if ($checkAndCreatePath === true && !is_dir($folder)) {
-            new Folder($folder, true);
+            mkdir($folder, 0755, true);
         }
 
         return $folder . Text::uuid();
-    }
-
-    /**
-     * Convenience alias for fileToUploadArray
-     *
-     * @param string $file The file you want to get an upload array for.
-     * @param string|null $filename File with path
-     * @return array Array that matches the structure of a regular upload
-     */
-    public static function uploadArray($file, $filename = null): array
-    {
-        return static::fileToUploadArray($file, $filename);
     }
 
     /**

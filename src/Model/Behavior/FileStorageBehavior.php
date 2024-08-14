@@ -19,6 +19,7 @@ use Cake\Event\Event;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
 use Cake\ORM\Behavior;
+use Cake\Utility\Text;
 
 /**
  * Storage Behavior
@@ -156,7 +157,7 @@ class FileStorageBehavior extends Behavior
                 if ($fileHashMethod === true) {
                     $fileHashMethod = 'sha1';
                 }
-                $entity->set('hash', StorageUtils::getFileHash($entity->get('file')['tmp_name'], $fileHashMethod));
+                $entity->set('hash', StorageUtils::getFileHash(Text::uuid(), $fileHashMethod));
             }
         }
     }

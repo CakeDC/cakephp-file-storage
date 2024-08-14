@@ -359,7 +359,9 @@ abstract class AbstractListener implements EventListenerInterface
             $fileField = $this->getConfig('fileField');
             $entity = $event->getData('entity');
             $Storage = $this->getStorageAdapter($entity['adapter']);
-            $Storage->write($entity['path'], file_get_contents($entity[$fileField]['tmp_name']), true);
+            /** @var \Psr\Http\Message\UploadedFileInterface $file */
+            $file = $entity[$fileField];
+            $Storage->write($entity['path'], (string)$file->getStream(), true);
             $event->setResult($event->getSubject()
                     ->save($entity, [
                         'checkRules' => false,

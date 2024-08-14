@@ -165,7 +165,7 @@ class UploadBehavior extends Behavior
         $options = $defaults;
 
         if (is_string($file)) {
-            $file = StorageUtils::fileToUploadArray($file);
+            $file = StorageUtils::fileToUploadedFileObject($file);
         }
 
         $model = $this->_getStorageModel($options);

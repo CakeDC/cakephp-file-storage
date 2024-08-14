@@ -102,7 +102,7 @@ class StorageShell extends Shell
     {
         $this->_storePrecheck();
         $model = $this->loadModel($this->params['model']);
-        $fileData = StorageUtils::fileToUploadArray($this->args[0]);
+        $fileData = StorageUtils::fileToUploadedFileObject($this->args[0]);
         $entity = $model->newEntity([
             'adapter' => $this->params['adapter'],
             'file' => $fileData,

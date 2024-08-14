@@ -11,6 +11,7 @@ namespace Burzum\FileStorage\Storage\Listener;
 use Burzum\FileStorage\Storage\StorageUtils;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
+use Cake\Utility\Text;
 use InvalidArgumentException;
 
 /**
@@ -103,9 +104,7 @@ class BaseListener extends AbstractListener
     public function afterSave(EventInterface $event, EntityInterface $entity): void
     {
         if ($this->_checkEvent($event) && $entity->isNew()) {
-            $fileField = $this->getConfig('fileField');
-
-            $hash = StorageUtils::getFileHash($entity->get($fileField)['tmp_name']);
+            $hash = StorageUtils::getFileHash(Text::uuid());
             $path = $this->pathBuilder()->fullPath($entity);
 
             $entity->set('hash', $hash);

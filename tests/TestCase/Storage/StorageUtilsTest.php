@@ -241,24 +241,6 @@ class StorageUtilsTest extends FileStorageTestCase
     }
 
     /**
-     * testUploadArray
-     *
-     * @return void
-     */
-    public function testUploadArray()
-    {
-        $expected = [
-            'name' => 'titus.jpg',
-            'tmp_name' => $this->fileFixtures . 'titus.jpg',
-            'error' => 0,
-            'type' => 'image/jpeg',
-            'size' => 332643,
-        ];
-        $result = StorageUtils::uploadArray($this->fileFixtures . 'titus.jpg');
-        $this->assertEquals($result, $expected);
-    }
-
-    /**
      * testGetFileHash
      *
      * @return void
