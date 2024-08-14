@@ -81,12 +81,12 @@ class FileStorageBehavior extends Behavior
      * beforeMarshal callback
      *
      * @param \Cake\Event\Event $event
-     * @param \ArrayAccess $data
+     * @param \ArrayObject $data
      * @return void
      */
-    public function beforeMarshal(Event $event, ArrayAccess $data): void
+    public function beforeMarshal(Event $event, ArrayObject $data): void
     {
-        if (!$this->_isFileUploadPresent($data)) {
+        if (!$this->_isFileUploadPresent($data->getArrayCopy())) {
             return;
         }
 
