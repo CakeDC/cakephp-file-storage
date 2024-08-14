@@ -221,27 +221,22 @@ class StorageUtils
     }
 
     /**
-     * Gets the hash of a file.
+     * Gets the hash of a file contents.
      *
      * You can use this to compare if you got two times the same file uploaded.
-     *
-     * @param string $file Path to the file on your local machine.
-     * @param string $method 'md5' or 'sha1'
-     * @throws \InvalidArgumentException
-     * @link http://php.net/manual/en/function.md5-file.php
-     * @link http://php.net/manual/en/function.sha1-file.php
-     * @link http://php.net/manual/en/function.sha1-file.php#104748
-     * @return string
      */
-    public static function getFileHash(string $file, string $method = 'sha1'): string
+    public static function getFileContentHash(string $fileContent, string $method = 'sha1'): string
     {
         if ($method === 'md5') {
-            return md5_file($file);
+            return md5($fileContent);
         }
         if ($method === 'sha1') {
-            return sha1_file($file);
+            return sha1($fileContent);
         }
 
-        throw new InvalidArgumentException(sprintf('Invalid hash method "%s" provided!', $method));
+        throw new InvalidArgumentException(sprintf(
+            'Invalid hash method "%s" provided!',
+            $method
+        ));
     }
 }

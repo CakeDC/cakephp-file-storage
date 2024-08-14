@@ -10,7 +10,6 @@ declare(strict_types=1);
  */
 namespace Burzum\FileStorage\Model\Behavior;
 
-use ArrayAccess;
 use ArrayObject;
 use Burzum\FileStorage\Storage\StorageTrait;
 use Burzum\FileStorage\Storage\StorageUtils;
@@ -19,7 +18,6 @@ use Cake\Event\Event;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
 use Cake\ORM\Behavior;
-use Cake\Utility\Text;
 
 /**
  * Storage Behavior
@@ -157,7 +155,9 @@ class FileStorageBehavior extends Behavior
                 if ($fileHashMethod === true) {
                     $fileHashMethod = 'sha1';
                 }
-                $entity->set('hash', StorageUtils::getFileHash(Text::uuid(), $fileHashMethod));
+                /** @var \Psr\Http\Message\UploadedFileInterface $file */
+                $file = $entity->get('file');
+                $entity->set('hash', StorageUtils::getFileContentHash((string)$file->getStream(), $fileHashMethod));
             }
         }
     }

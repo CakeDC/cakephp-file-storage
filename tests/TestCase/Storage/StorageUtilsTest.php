@@ -245,12 +245,12 @@ class StorageUtilsTest extends FileStorageTestCase
      *
      * @return void
      */
-    public function testGetFileHash()
+    public function testGetFileContentHash()
     {
-        $result = StorageUtils::getFileHash($this->fileFixtures . 'titus.jpg');
+        $result = StorageUtils::getFileContentHash(file_get_contents($this->fileFixtures . 'titus.jpg'));
         $this->assertEquals($result, 'd68da24d79835d70d5d8a544f62616d0e51af191');
 
-        $result = StorageUtils::getFileHash($this->fileFixtures . 'titus.jpg', 'md5');
+        $result = StorageUtils::getFileContentHash(file_get_contents($this->fileFixtures . 'titus.jpg'), 'md5');
         $this->assertEquals($result, '29574141b2c44cc029828f6c5c6d3cd2');
     }
 
@@ -259,9 +259,9 @@ class StorageUtilsTest extends FileStorageTestCase
      *
      * @return void
      */
-    public function testGetFileHashInvalidArgumentException()
+    public function testGetFileContentHashInvalidArgumentException()
     {
         $this->expectException(\InvalidArgumentException::class);
-        StorageUtils::getFileHash($this->fileFixtures . 'titus.jpg', 'invalid-hash-method!');
+        StorageUtils::getFileContentHash(file_get_contents($this->fileFixtures . 'titus.jpg'), 'invalid-hash-method!');
     }
 }
