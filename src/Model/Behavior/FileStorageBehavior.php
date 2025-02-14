@@ -225,14 +225,14 @@ class FileStorageBehavior extends Behavior
     public function _getFileInfoFromUpload(&$upload, string $field = 'file'): void
     {
         /** @var \Psr\Http\Message\UploadedFileInterface|null $fileField */
-        $fileField = $upload[$field];
+        $fileField = isset($upload[$field]) ? $upload[$field] : null;
 
         if ($fileField) {
             $upload['extension'] = pathinfo($fileField->getClientFilename(), PATHINFO_EXTENSION);
             $upload['filename'] = $fileField->getClientFilename();
         }
 
-        if ($fileField || !$fileField->getError()) {
+        if ($fileField && !$fileField->getError()) {
             $upload['filesize'] = $fileField->getSize();
             $upload['mime_type'] = $fileField->getClientMediaType();
         }
