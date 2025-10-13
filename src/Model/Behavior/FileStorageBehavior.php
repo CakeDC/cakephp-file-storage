@@ -64,7 +64,7 @@ class FileStorageBehavior extends Behavior
     protected function _isFileUploadPresent($entity): bool
     {
         $field = $this->getConfig('fileField');
-        if ($this->getConfig('ignoreEmptyFile') === true) {
+        if ($this->getConfig('ignoreEmptyFile') === true && isset($entity[$field])) {
             /** @var \Psr\Http\Message\UploadedFileInterface|null $fileField */
             $fileField = $entity[$field];
             if (!$fileField || $fileField->getError() === UPLOAD_ERR_NO_FILE) {
