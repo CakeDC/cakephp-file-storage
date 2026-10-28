@@ -308,9 +308,9 @@ abstract class AbstractListener implements EventListenerInterface
      * Get the path for a storage entity.
      *
      * @param \Cake\Event\Event $event
-     * @return string
+     * @return void
      */
-    public function getPath(Event $event): string
+    public function getPath(Event $event): void
     {
         $pathBuilder = $this->pathBuilder();
         $method = $event->getData('method');
@@ -318,39 +318,39 @@ abstract class AbstractListener implements EventListenerInterface
             throw new BadMethodCallException(sprintf('`%s` does not implement the `%s` method!', get_class($pathBuilder), $method));
         }
 
-        $event = $this->dispatchEvent('FileStorage.beforeGetPath', [
+        $beforeGetPathEvent = $this->dispatchEvent('FileStorage.beforeGetPath', [
             'entity' => $event->getData('entity'),
             'storageAdapter' => $this->getStorageAdapter($event->getData('entity')->get('adapter')),
             'pathBuilder' => $pathBuilder,
         ]);
 
-        if ($event->isStopped()) {
-            return $event->getResult();
+        if ($beforeGetPathEvent->isStopped()) {
+            return;
         }
 
-        if ($event->getSubject() instanceof EntityInterface) {
-            $event->getData('entity');
+        if ($beforeGetPathEvent->getSubject() instanceof EntityInterface) {
+            $beforeGetPathEvent->getData('entity');
         }
 
-        if (empty($event->getData('entity'))) {
+        if (empty($beforeGetPathEvent->getData('entity'))) {
             throw new RuntimeException('No entity present!');
         }
 
-        $path = $pathBuilder->{$method}($event->getData('entity'), $event->getData());
+        $path = $pathBuilder->{$method}($beforeGetPathEvent->getData('entity'), $beforeGetPathEvent->getData());
 
-        $entity = $event->getData('entity');
-        $event = $this->dispatchEvent('FileStorage.afterGetPath', [
+        $entity = $beforeGetPathEvent->getData('entity');
+        $afterGetPathEvent = $this->dispatchEvent('FileStorage.afterGetPath', [
             'entity' => $entity,
             'storageAdapter' => $this->getStorageAdapter($entity->get('adapter')),
             'pathBuilder' => $pathBuilder,
             'path' => $path,
         ]);
 
-        if ($event->isStopped()) {
-            return $event->getResult();
+        if ($afterGetPathEvent->isStopped()) {
+            return;
         }
 
-        return $path;
+        $event->setResult($path);
     }
 
     /**
@@ -373,9 +373,9 @@ abstract class AbstractListener implements EventListenerInterface
             $Storage = $this->getStorageAdapter($entity['adapter']);
             $Storage->write($entity['path'], file_get_contents($entity[$fileField]['tmp_name']), true);
             $event->setResult($event->getSubject()
-                    ->save($entity, [
-                        'checkRules' => false,
-                    ]));
+                ->save($entity, [
+                    'checkRules' => false,
+                ]));
             $this->_afterStoreFile($event);
             if ($event->isStopped()) {
                 return $event->getResult();
